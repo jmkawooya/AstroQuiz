@@ -98,6 +98,16 @@ body {
   margin-bottom: 0.5rem;
 }
 
+.title-link {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.title-link:hover {
+  color: var(--accent-primary);
+}
+
 .app-header p {
   color: var(--text-tertiary);
   font-size: 1.1rem;
