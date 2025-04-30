@@ -1,54 +1,75 @@
-# React + TypeScript + Vite
+# AstroQuiz
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive astrology quiz application built with React and TypeScript.
 
-Currently, two official plugins are available:
+## About
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+AstroQuiz is a web application designed to test your knowledge of astrological concepts. It offers quizzes on various aspects of astrology, including planets, signs, houses, and aspects.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Customizable Quiz Settings**: Select from different difficulty levels (Easy or Hard) and choose specific astrological categories to focus on.
+- **Dynamic Quiz Generation**: Each quiz session generates unique questions based on your selected preferences.
+- **Comprehensive Feedback**: Receive immediate feedback on your answers and a detailed summary at the end of each quiz.
+- **Educational Content**: Learn about astrological concepts through questions based on Honeycomb Collective Study Resources.
+- **Dark/Light Theme Toggle**: Switch between dark and light modes for your preferred viewing experience.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Quiz Categories
+
+- **Planets**: Questions about planetary archetypes, needs, descriptors, and dignities.
+- **Signs**: Questions about zodiac signs, their elements, modalities, and key characteristics.
+- **Houses**: Questions about astrological houses and their associated topics.
+- **Aspects**: Questions about the relationships between planetary bodies.
+
+## Quiz Modes
+
+- **Easy Mode**: Questions about general astrological concepts with complete descriptions.
+- **Hard Mode**: More challenging questions about specific keywords and individual concepts.
+
+## Getting Started
+
+### Live Demo
+
+You can take the quiz directly by visiting:
+[https://jmkawooya.github.io/AstroQuiz/](https://jmkawooya.github.io/AstroQuiz/)
+
+### Installation Prerequisites
+
+- Node.js (v14 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
+```
+git clone https://github.com/yourusername/astroquiz.git
+cd astroquiz
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+2. Install dependencies
 ```
+npm install
+```
+
+3. Start the development server
+```
+npm run dev
+```
+
+4. Build for production
+```
+npm run build
+```
+
+## Technologies Used
+
+- React 19
+- TypeScript
+- Vite
+- CSS
+
+## Credits
+
+Based on Honeycomb Collective resources:
+- [Honeycomb Resources Page](https://www.honeycomb.co/resources/)
+- [Honeycomb Study Resources PDF](https://www.honeycomb.co/pdf/HoneycombStudyResources_v1.pdf)
