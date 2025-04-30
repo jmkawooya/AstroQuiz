@@ -1,0 +1,79 @@
+import { useState, useEffect } from 'react';
+import { QuizQuestion } from '../utils/quizGenerator';
+
+interface QuizCardProps {
+  question: QuizQuestion;
+  onAnswer: (isCorrect: boolean, selectedOption: string) => void;
+}
+
+const QuizCard: React.FC<QuizCardProps> = ({ question, onAnswer }) => {
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  const [hasAnswered, setHasAnswered] = useState(false);
+
+  // Reset component state when question changes
+  useEffect(() => {
+    setSelectedAnswer(null);
+    setHasAnswered(false);
+  }, [question.id]);
+
+  const handleOptionClick = (option: string) => {
+    if (hasAnswered) return;
+    
+    setSelectedAnswer(option);
+    setHasAnswered(true);
+    
+    const isCorrect = option === question.correctAnswer;
+    onAnswer(isCorrect, option);
+  };
+
+  const getOptionClassName = (option: string) => {
+    if (!hasAnswered || selectedAnswer !== option) {
+      return 'option';
+    }
+    
+    if (option === question.correctAnswer) {
+      return 'option correct';
+    }
+    
+    return 'option incorrect';
+  };
+
+  return (
+    <div className="quiz-card">
+      <div className="question-container">
+        <h3 className="question">{question.question}</h3>
+        <div className="category-badge">{question.category}</div>
+      </div>
+      
+      <div className="options-container">
+        {question.options.map((option, index) => (
+          <button
+            key={index}
+            className={getOptionClassName(option)}
+            onClick={() => handleOptionClick(option)}
+            disabled={hasAnswered}
+          >
+            {option}
+          </button>
+        ))}
+      </div>
+      
+      {hasAnswered && (
+        <div className="feedback">
+          {selectedAnswer === question.correctAnswer ? (
+            <p className="correct-message">✓ Correct!</p>
+          ) : (
+            <div className="incorrect-feedback">
+              <p className="incorrect-message">✗ Incorrect</p>
+              <p className="correct-answer">
+                The correct answer is: <strong>{question.correctAnswer}</strong>
+              </p>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default QuizCard; 
