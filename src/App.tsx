@@ -9,7 +9,7 @@ function App() {
       <div className="app">
         <header className="app-header">
           <div className="header-content">
-            <h1><a href="/" className="title-link">AstroQuiz</a></h1>
+            <h1><a href={import.meta.env.BASE_URL} className="title-link">AstroQuiz</a></h1>
             <ThemeToggle />
           </div>
           <p>Test your knowledge of astrological concepts!</p>
