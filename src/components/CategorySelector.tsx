@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 export type QuizCategory = 'planet' | 'sign' | 'house' | 'aspect';
 
 interface CategorySelectorProps {
