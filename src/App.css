@@ -428,12 +428,7 @@ body {
 }
 
 .mode-badge {
-  background-color: var(--accent-secondary);
-  color: var(--text-secondary);
-  padding: 0.3rem 0.8rem;
-  border-radius: 16px;
-  font-size: 0.8rem;
-  font-weight: 600;
+  /* No specific overrides needed, inherits from info-badge */
 }
 
 /* Quiz start screen */
@@ -502,8 +497,8 @@ body {
 }
 
 /* Completion screen */
-.quiz-complete .mode-badge {
-  display: inline-block;
+.quiz-complete .info-badge {
+  display: inline-flex;
   margin-top: 0.5rem;
 }
 
@@ -626,6 +621,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   gap: 0.8rem;
   margin: 1rem 0;
 }
@@ -637,7 +633,14 @@ body {
   border-radius: 16px;
   font-size: 0.8rem;
   font-weight: 600;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  height: 1.5rem;
+  line-height: 1;
+}
+
+.mode-badge {
+  /* No specific overrides needed, inherits from info-badge */
 }
 
 .categories-badge {

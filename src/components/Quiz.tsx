@@ -145,10 +145,10 @@ const Quiz: React.FC = () => {
               : "Keep studying, you'll get there! The stars are complex."}
         </p>
         <div className="quiz-info-badges">
-          <span className="info-badge mode-badge">Mode: {mode === 'easy' ? 'Easy' : 'Hard'}</span>
-          <span className="info-badge categories-badge">
+          <div className="info-badge mode-badge">Mode: {mode === 'easy' ? 'Easy' : 'Hard'}</div>
+          <div className="info-badge categories-badge">
             Categories: {selectedCategories.map(c => c.charAt(0).toUpperCase() + c.slice(1)).join(', ')}
-          </span>
+          </div>
         </div>
         
         <div className="answers-summary">
