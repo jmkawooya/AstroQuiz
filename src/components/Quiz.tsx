@@ -90,11 +90,6 @@ const Quiz: React.FC = () => {
   if (!quizStarted) {
     return (
       <div className="quiz-start">
-        <h2>AstroQuiz</h2>
-        <p className="mode-description">
-          <strong>Customize your quiz:</strong>
-        </p>
-        
         <div className="quiz-options">
           <div className="quiz-option-section">
             <h3>Difficulty</h3>
