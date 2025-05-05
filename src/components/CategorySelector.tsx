@@ -42,8 +42,6 @@ const CategorySelector: React.FC<CategorySelectorProps> = ({
   
   return (
     <div className="category-selector">
-      <h3 className="category-selector-title">Select Categories:</h3>
-      
       <div className="category-options">
         {categories.map(category => (
           <button
