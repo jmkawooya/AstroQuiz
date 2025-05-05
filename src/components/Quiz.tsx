@@ -102,7 +102,7 @@ const Quiz: React.FC = () => {
                 onClick={() => handleModeChange('easy')}
                 aria-pressed={mode === 'easy'}
               >
-                <h3>Easy</h3>
+                <h3>Easy <span className="difficulty-icon">⭐</span></h3>
                 <p>Questions about general astrological concepts with complete descriptions.</p>
               </button>
               <button 
@@ -110,7 +110,7 @@ const Quiz: React.FC = () => {
                 onClick={() => handleModeChange('hard')}
                 aria-pressed={mode === 'hard'}
               >
-                <h3>Hard</h3>
+                <h3>Hard <span className="difficulty-icon">🧠</span></h3>
                 <p>More challenging questions about specific keywords and individual concepts.</p>
               </button>
             </div>
@@ -118,7 +118,7 @@ const Quiz: React.FC = () => {
           
           <div className="quiz-option-section">
             <h3>Categories</h3>
-            <p>Deselect astrological elements you don't want to be tested on:</p>
+            <p>Deselect categories you don't want to be tested on:</p>
             
             <div className="selector-container">
               <CategorySelector 
@@ -152,7 +152,7 @@ const Quiz: React.FC = () => {
               : "Keep studying, you'll get there! The stars are complex."}
         </p>
         <div className="quiz-info-badges">
-          <div className="info-badge mode-badge">Mode: {mode === 'easy' ? 'Easy' : 'Hard'}</div>
+          <div className="info-badge mode-badge">Mode: {mode === 'easy' ? 'Easy ⭐' : 'Hard 🧠'}</div>
           <div className="info-badge categories-badge">
             Categories: {selectedCategories.map(c => c.charAt(0).toUpperCase() + c.slice(1)).join(', ')}
           </div>
@@ -192,7 +192,7 @@ const Quiz: React.FC = () => {
                 onClick={() => handleModeChange('easy')}
                 aria-pressed={mode === 'easy'}
               >
-                <h3>Easy</h3>
+                <h3>Easy <span className="difficulty-icon">⭐</span></h3>
                 <p>Questions about general astrological concepts with complete descriptions.</p>
               </button>
               <button 
@@ -200,7 +200,7 @@ const Quiz: React.FC = () => {
                 onClick={() => handleModeChange('hard')}
                 aria-pressed={mode === 'hard'}
               >
-                <h3>Hard</h3>
+                <h3>Hard <span className="difficulty-icon">🧠</span></h3>
                 <p>More challenging questions about specific keywords and individual concepts.</p>
               </button>
             </div>
@@ -225,7 +225,7 @@ const Quiz: React.FC = () => {
           Question {currentQuestionIndex + 1} of {questions.length}
         </div>
         <div className="info">
-          <div className="mode-badge">{mode === 'easy' ? 'Easy' : 'Hard'}</div>
+          <div className="mode-badge">{mode === 'easy' ? 'Easy ⭐' : 'Hard 🧠'}</div>
           <div className="score">
             Score: {score}
           </div>
