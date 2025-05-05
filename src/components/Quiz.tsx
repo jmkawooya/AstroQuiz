@@ -118,7 +118,7 @@ const Quiz: React.FC = () => {
           
           <div className="quiz-option-section">
             <h3>Categories</h3>
-            <p>Select which astrological elements you want to be tested on:</p>
+            <p>Deselect astrological elements you don't want to be tested on:</p>
             
             <div className="selector-container">
               <CategorySelector 
