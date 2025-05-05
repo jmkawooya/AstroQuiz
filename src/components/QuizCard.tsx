@@ -4,9 +4,18 @@ import { QuizQuestion } from '../utils/quizGenerator';
 interface QuizCardProps {
   question: QuizQuestion;
   onAnswer: (isCorrect: boolean, selectedOption: string) => void;
+  showNextButton?: boolean;
+  onNextQuestion?: () => void;
+  isLastQuestion?: boolean;
 }
 
-const QuizCard: React.FC<QuizCardProps> = ({ question, onAnswer }) => {
+const QuizCard: React.FC<QuizCardProps> = ({ 
+  question, 
+  onAnswer, 
+  showNextButton = false,
+  onNextQuestion,
+  isLastQuestion = false
+}) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [hasAnswered, setHasAnswered] = useState(false);
 
@@ -24,6 +33,12 @@ const QuizCard: React.FC<QuizCardProps> = ({ question, onAnswer }) => {
     
     const isCorrect = option === question.correctAnswer;
     onAnswer(isCorrect, option);
+  };
+
+  const handleNextClick = () => {
+    if (onNextQuestion) {
+      onNextQuestion();
+    }
   };
 
   const getOptionClassName = (option: string) => {
@@ -58,20 +73,31 @@ const QuizCard: React.FC<QuizCardProps> = ({ question, onAnswer }) => {
         ))}
       </div>
       
-      {hasAnswered && (
-        <div className="feedback">
-          {selectedAnswer === question.correctAnswer ? (
-            <p className="correct-message">✓ Correct!</p>
-          ) : (
-            <div className="incorrect-feedback">
-              <p className="incorrect-message">✗ Incorrect</p>
-              <p className="correct-answer">
-                The correct answer is: <strong>{question.correctAnswer}</strong>
-              </p>
-            </div>
-          )}
-        </div>
-      )}
+      <div className="feedback-container">
+        {hasAnswered && (
+          <div className="feedback">
+            {selectedAnswer === question.correctAnswer ? (
+              <p className="correct-message">✓ Correct!</p>
+            ) : (
+              <div className="incorrect-feedback">
+                <p className="incorrect-message">✗ Incorrect</p>
+                <p className="correct-answer">
+                  The correct answer is: <strong>{question.correctAnswer}</strong>
+                </p>
+              </div>
+            )}
+          </div>
+        )}
+        
+        {showNextButton && (
+          <button 
+            className="next-button" 
+            onClick={handleNextClick}
+          >
+            {!isLastQuestion ? '→' : 'See Results'}
+          </button>
+        )}
+      </div>
     </div>
   );
 };

@@ -234,11 +234,20 @@ body {
   border-color: var(--incorrect-border);
 }
 
-.feedback {
+.feedback-container {
   margin-top: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.feedback {
+  flex: 1;
   padding: 1rem;
   border-radius: 8px;
   background-color: var(--option-bg);
+  max-width: calc(100% - 80px);
 }
 
 .correct-message {
@@ -380,6 +389,23 @@ body {
   .question {
     font-size: 1.1rem;
   }
+  
+  .next-button {
+    width: auto;
+    height: 50px;
+    min-width: 50px;
+    padding: 0.5rem;
+    margin-top: 0;
+  }
+  
+  .feedback-container {
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .feedback {
+    max-width: calc(100% - 70px);
+  }
 }
 
 /* Mode selector */
@@ -425,10 +451,6 @@ body {
   display: flex;
   align-items: center;
   gap: 1rem;
-}
-
-.mode-badge {
-  /* No specific overrides needed, inherits from info-badge */
 }
 
 /* Quiz start screen */
@@ -639,10 +661,6 @@ body {
   line-height: 1;
 }
 
-.mode-badge {
-  /* No specific overrides needed, inherits from info-badge */
-}
-
 .categories-badge {
   background-color: var(--option-hover-bg);
 }
@@ -673,5 +691,51 @@ body {
   
   .category-icon {
     margin-bottom: 0;
+  }
+}
+
+.quiz-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.next-button-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 1.5rem 2rem;
+}
+
+.next-button {
+  background-color: var(--accent-primary);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 4px 10px var(--shadow-color);
+  min-width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+}
+
+.next-button:hover {
+  background-color: var(--text-secondary);
+  transform: translateY(-2px);
+}
+
+.next-button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .next-button {
+    width: 100%;
+    padding: 0.8rem 1rem;
   }
 }

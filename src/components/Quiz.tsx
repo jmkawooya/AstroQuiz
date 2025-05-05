@@ -21,6 +21,7 @@ const Quiz: React.FC = () => {
   const [mode, setMode] = useState<QuizMode>('easy');
   const [quizStarted, setQuizStarted] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<QuizCategory[]>(['planet', 'sign', 'house', 'aspect']);
+  const [hasAnsweredCurrent, setHasAnsweredCurrent] = useState(false);
 
   // Generate quiz questions when mode changes or when starting a new quiz
   const generateQuizQuestions = () => {
@@ -33,6 +34,7 @@ const Quiz: React.FC = () => {
     setScore(0);
     setUserAnswers([]);
     setIsQuizComplete(false);
+    setHasAnsweredCurrent(false);
   };
 
   // Initial quiz generation
@@ -59,14 +61,16 @@ const Quiz: React.FC = () => {
       setScore(prevScore => prevScore + 1);
     }
     
-    // Wait 1.5 seconds before moving to the next question to allow time to see feedback
-    setTimeout(() => {
-      if (currentQuestionIndex < questions.length - 1) {
-        setCurrentQuestionIndex(prevIndex => prevIndex + 1);
-      } else {
-        setIsQuizComplete(true);
-      }
-    }, 1500);
+    setHasAnsweredCurrent(true);
+  };
+
+  const handleNextQuestion = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(prevIndex => prevIndex + 1);
+      setHasAnsweredCurrent(false);
+    } else {
+      setIsQuizComplete(true);
+    }
   };
 
   const restartQuiz = () => {
@@ -209,10 +213,15 @@ const Quiz: React.FC = () => {
       </div>
       
       {questions.length > 0 && (
-        <QuizCard 
-          question={questions[currentQuestionIndex]} 
-          onAnswer={handleAnswer} 
-        />
+        <div className="quiz-content">
+          <QuizCard 
+            question={questions[currentQuestionIndex]} 
+            onAnswer={handleAnswer} 
+            showNextButton={hasAnsweredCurrent}
+            onNextQuestion={handleNextQuestion}
+            isLastQuestion={currentQuestionIndex === questions.length - 1}
+          />
+        </div>
       )}
     </div>
   );
