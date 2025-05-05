@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { generateQuiz, QuizQuestion, QuizMode } from '../utils/quizGenerator';
 import QuizCard from './QuizCard';
-import ModeSelector from './ModeSelector';
 import CategorySelector, { QuizCategory } from './CategorySelector';
 
 // Interface to track user answers
@@ -98,18 +97,22 @@ const Quiz: React.FC = () => {
           <div className="quiz-option-section">
             <h3>Difficulty</h3>
             <div className="mode-descriptions">
-              <div className="mode-description-card">
-                <h3>Easy Mode</h3>
+              <button 
+                className={`mode-description-card ${mode === 'easy' ? 'active' : ''}`}
+                onClick={() => handleModeChange('easy')}
+                aria-pressed={mode === 'easy'}
+              >
+                <h3>Easy</h3>
                 <p>Questions about general astrological concepts with complete descriptions.</p>
-              </div>
-              <div className="mode-description-card">
-                <h3>Hard Mode</h3>
+              </button>
+              <button 
+                className={`mode-description-card ${mode === 'hard' ? 'active' : ''}`}
+                onClick={() => handleModeChange('hard')}
+                aria-pressed={mode === 'hard'}
+              >
+                <h3>Hard</h3>
                 <p>More challenging questions about specific keywords and individual concepts.</p>
-              </div>
-            </div>
-            
-            <div className="selector-container">
-              <ModeSelector mode={mode} onModeChange={handleModeChange} />
+              </button>
             </div>
           </div>
           
@@ -183,7 +186,24 @@ const Quiz: React.FC = () => {
         
         <div className="end-actions">
           <div className="quiz-config-container">
-            <ModeSelector mode={mode} onModeChange={handleModeChange} />
+            <div className="mode-descriptions">
+              <button 
+                className={`mode-description-card ${mode === 'easy' ? 'active' : ''}`}
+                onClick={() => handleModeChange('easy')}
+                aria-pressed={mode === 'easy'}
+              >
+                <h3>Easy</h3>
+                <p>Questions about general astrological concepts with complete descriptions.</p>
+              </button>
+              <button 
+                className={`mode-description-card ${mode === 'hard' ? 'active' : ''}`}
+                onClick={() => handleModeChange('hard')}
+                aria-pressed={mode === 'hard'}
+              >
+                <h3>Hard</h3>
+                <p>More challenging questions about specific keywords and individual concepts.</p>
+              </button>
+            </div>
             <CategorySelector 
               selectedCategories={selectedCategories} 
               onCategoriesChange={handleCategoriesChange} 

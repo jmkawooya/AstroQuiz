@@ -408,44 +408,6 @@ body {
   }
 }
 
-/* Mode selector */
-.mode-selector {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.mode-label {
-  font-weight: 500;
-  color: var(--text-secondary);
-}
-
-.mode-options {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.mode-button {
-  background-color: var(--bg-tertiary);
-  color: var(--text-primary);
-  border: 2px solid transparent;
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.mode-button.active {
-  background-color: var(--accent-primary);
-  color: #fff;
-}
-
-.mode-button:hover:not(.active) {
-  background-color: var(--option-hover-bg);
-}
-
 /* Quiz info header */
 .quiz-header .info {
   display: flex;
@@ -469,23 +431,50 @@ body {
 }
 
 .mode-descriptions {
-  display: flex;
-  gap: 1.5rem;
-  margin: 2rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .mode-description-card {
-  flex: 1;
-  background-color: var(--option-bg);
-  padding: 1.5rem;
+  background-color: var(--bg-tertiary);
+  border: 2px solid var(--option-border);
   border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 8px var(--shadow-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
   text-align: left;
+  width: 100%;
+  display: block;
+  font-family: inherit;
+  color: var(--text-primary);
+}
+
+.mode-description-card.active {
+  border-color: var(--accent-primary);
+  background-color: var(--accent-primary);
+  color: #fff;
+}
+
+.mode-description-card.active h3 {
+  color: #fff;
+}
+
+.mode-description-card.active p {
+  color: #fff;
+}
+
+.mode-description-card:hover:not(.active) {
+  background-color: var(--option-hover-bg);
+  border-color: var(--option-hover-border);
 }
 
 .mode-description-card h3 {
   color: var(--text-secondary);
-  margin-bottom: 1rem;
-  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
 }
 
 .mode-description-card .example {
@@ -538,7 +527,8 @@ body {
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .mode-descriptions {
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
   
   .mode-selector {
@@ -670,10 +660,24 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  margin-bottom: 1.5rem;
-  padding: 1.5rem;
-  background-color: var(--bg-tertiary);
-  border-radius: 12px;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.quiz-config-container .mode-descriptions {
+  margin-bottom: 0;
+}
+
+.quiz-config-container .mode-description-card {
+  padding: 1rem;
+}
+
+.quiz-config-container .mode-description-card h3 {
+  font-size: 1rem;
+}
+
+.quiz-config-container .mode-description-card p {
+  font-size: 0.9rem;
 }
 
 /* Responsive adjustments */
