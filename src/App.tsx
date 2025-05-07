@@ -2,7 +2,7 @@ import Quiz from './components/Quiz';
 import ThemeToggle from './components/ThemeToggle';
 import { ThemeProvider } from './utils/ThemeContext';
 import { useEffect } from 'react';
-import { createStarsBackground } from './utils/StarsBackground';
+import { createWebGLStarsBackground, cleanupWebGLStarsBackground, updateStarColors } from './utils/WebGLStarsBackground';
 import './App.css';
 
 function App() {
@@ -15,15 +15,12 @@ function App() {
     document.documentElement.classList.add('no-pseudo');
     document.body.classList.add('no-pseudo');
     
-    // Create the random starry background on component mount
-    createStarsBackground();
+    // Create the GPU-accelerated WebGL starry background on component mount
+    createWebGLStarsBackground();
     
     // Cleanup on unmount
     return () => {
-      const container = document.querySelector('.stars-container');
-      if (container) {
-        document.body.removeChild(container);
-      }
+      cleanupWebGLStarsBackground();
       
       // Remove the classes
       document.documentElement.classList.remove('no-pseudo');

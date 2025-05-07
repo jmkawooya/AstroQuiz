@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
+import { updateStarColors } from './WebGLStarsBackground';
 
 type Theme = 'light' | 'dark';
 
@@ -22,11 +23,22 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   // Apply theme to document on theme change
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
+    
+    // Update WebGL star colors based on theme
+    if (theme === 'light') {
+      // Slightly dimmer white stars for light theme
+      updateStarColors([0.95, 0.95, 0.98]);
+    } else {
+      // Brighter white stars for dark theme
+      updateStarColors([1.0, 1.0, 1.0]);
+    }
   }, [theme]);
 
   // Set initial theme on component mount
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', 'light'); // Changed to light
+    // Set initial star colors
+    updateStarColors([0.95, 0.95, 0.98]);
   }, []);
 
   const toggleTheme = () => {

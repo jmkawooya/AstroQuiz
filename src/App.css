@@ -21,9 +21,6 @@
   --incorrect-border: #f44336;
   --incorrect-text: #f44336;
   --shadow-color: rgba(149, 128, 255, 0.2);
-  --star-color-1: rgba(255, 255, 255, 0.9);
-  --star-color-2: rgba(255, 255, 255, 0.7);
-  --star-color-3: rgba(255, 255, 255, 0.5);
   --header-text-color: #f0f0f0;
 }
 
@@ -49,9 +46,6 @@
   --incorrect-border: #f44336;
   --incorrect-text: #ff6b6b;
   --shadow-color: rgba(0, 0, 0, 0.4);
-  --star-color-1: rgba(255, 255, 255, 1);
-  --star-color-2: rgba(255, 255, 255, 0.8);
-  --star-color-3: rgba(255, 255, 255, 0.6);
   --header-text-color: #f0f0f0;
 }
 
@@ -94,36 +88,15 @@ body::before, body::after {
   visibility: hidden !important;
 }
 
-/* Star twinkling animations - all start invisible and gradually appear */
-@keyframes twinkle-1 {
-  0% { opacity: 0; }
-  30% { opacity: 1; }
-  70% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-@keyframes twinkle-2 {
-  0% { opacity: 0; }
-  40% { opacity: 0.8; }
-  60% { opacity: 0.8; }
-  100% { opacity: 0; }
-}
-
-@keyframes twinkle-3 {
-  0% { opacity: 0; }
-  50% { opacity: 0.6; }
-  100% { opacity: 0; }
-}
-
-/* Star base styles */
-.star {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  border-radius: 50%;
-  background-color: var(--star-color-1);
-  box-shadow: 0 0 4px 1px var(--star-color-1);
-  opacity: 0; /* Start invisible */
+/* WebGL stars container */
+.webgl-stars-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
 }
 
 body {
@@ -134,57 +107,6 @@ body {
   position: relative;
   overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-/* Remove the old star layers */
-body::before,
-body::after,
-.stars-layer-3 {
-  content: none;
-}
-
-/* Create the starry night sky background container */
-.stars-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 0; /* Increase from -1 to ensure it's above any potential overlays but below content */
-  pointer-events: none; /* Prevent it from blocking interactions */
-}
-
-/* Set different sizes for stars */
-.star.small {
-  width: 1px;
-  height: 1px;
-  box-shadow: 0 0 2px 0.5px var(--star-color-3);
-}
-
-.star.medium {
-  width: 2px;
-  height: 2px;
-  box-shadow: 0 0 3px 0.8px var(--star-color-2);
-}
-
-.star.large {
-  width: 3px;
-  height: 3px;
-  box-shadow: 0 0 4px 1px var(--star-color-1);
-}
-
-/* Twinkle animations with different durations */
-.star.twinkle-1 {
-  animation: twinkle-1 4s ease-in-out infinite;
-}
-
-.star.twinkle-2 {
-  animation: twinkle-2 6s ease-in-out infinite;
-}
-
-.star.twinkle-3 {
-  animation: twinkle-3 8s ease-in-out infinite;
 }
 
 /* App layout */
