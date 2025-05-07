@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { generateQuiz, QuizQuestion, QuizMode } from '../utils/quizGenerator';
 import QuizCard from './QuizCard';
 import CategorySelector, { QuizCategory } from './CategorySelector';
+import { scrollElementToCenter } from '../utils/scrollHelper';
 
 // Interface to track user answers
 interface UserAnswer {
@@ -21,6 +22,9 @@ const Quiz: React.FC = () => {
   const [quizStarted, setQuizStarted] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<QuizCategory[]>(['planet', 'sign', 'house', 'aspect']);
   const [hasAnsweredCurrent, setHasAnsweredCurrent] = useState(false);
+  
+  // Refs for scrolling
+  const quizContentRef = useRef<HTMLDivElement>(null);
 
   // Generate quiz questions when mode changes or when starting a new quiz
   const generateQuizQuestions = () => {
@@ -34,6 +38,11 @@ const Quiz: React.FC = () => {
     setUserAnswers([]);
     setIsQuizComplete(false);
     setHasAnsweredCurrent(false);
+    
+    // Scroll to the quiz content after a short delay to allow for rendering
+    setTimeout(() => {
+      scrollElementToCenter('.quiz-container');
+    }, 100);
   };
 
   // Initial quiz generation
@@ -44,6 +53,15 @@ const Quiz: React.FC = () => {
       setLoading(false);
     }
   }, [quizStarted]);
+  
+  // Scroll to quiz content when questions change
+  useEffect(() => {
+    if (quizStarted && questions.length > 0 && !loading) {
+      setTimeout(() => {
+        scrollElementToCenter('.quiz-container');
+      }, 100);
+    }
+  }, [quizStarted, questions, loading]);
 
   const handleAnswer = (isCorrect: boolean, selectedOption: string) => {
     // Track the user's answer
@@ -61,18 +79,43 @@ const Quiz: React.FC = () => {
     }
     
     setHasAnsweredCurrent(true);
+    
+    // Scroll to center the feedback and next button after a short delay
+    setTimeout(() => {
+      scrollElementToCenter('.feedback-container');
+    }, 150);
   };
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(prevIndex => prevIndex + 1);
       setHasAnsweredCurrent(false);
+      
+      // Scroll back to the question on next
+      setTimeout(() => {
+        scrollElementToCenter('.quiz-container');
+      }, 100);
     } else {
       setIsQuizComplete(true);
+      
+      // Scroll to the very top of the page when showing results
+      setTimeout(() => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }, 100);
     }
   };
 
   const restartQuiz = () => {
+    // First scroll to top
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    
+    // Then generate new questions
     generateQuizQuestions();
   };
 
@@ -84,6 +127,11 @@ const Quiz: React.FC = () => {
 
   const handleCategoriesChange = (categories: QuizCategory[]) => {
     setSelectedCategories(categories);
+  };
+  
+  const handleStartQuiz = () => {
+    setQuizStarted(true);
+    // The scrolling will be handled in the generateQuizQuestions function
   };
 
   if (loading && quizStarted) {
@@ -131,7 +179,7 @@ const Quiz: React.FC = () => {
         
         <button 
           className="start-button" 
-          onClick={() => setQuizStarted(true)}
+          onClick={handleStartQuiz}
         >
           Start Quiz
         </button>
@@ -219,7 +267,7 @@ const Quiz: React.FC = () => {
   }
 
   return (
-    <div className="quiz-container">
+    <div className="quiz-container" ref={quizContentRef}>
       <div className="quiz-header">
         <div className="progress">
           Question {currentQuestionIndex + 1} of {questions.length}

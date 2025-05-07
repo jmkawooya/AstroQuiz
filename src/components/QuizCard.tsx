@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { QuizQuestion } from '../utils/quizGenerator';
+import { scrollElementToCenter } from '../utils/scrollHelper';
 
 interface QuizCardProps {
   question: QuizQuestion;
@@ -18,6 +19,7 @@ const QuizCard: React.FC<QuizCardProps> = ({
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
   const [hasAnswered, setHasAnswered] = useState(false);
+  const feedbackRef = useRef<HTMLDivElement>(null);
 
   // Reset component state when question changes
   useEffect(() => {
@@ -73,7 +75,7 @@ const QuizCard: React.FC<QuizCardProps> = ({
         ))}
       </div>
       
-      <div className="feedback-container">
+      <div className="feedback-container" ref={feedbackRef}>
         {hasAnswered && (
           <div className="feedback">
             {selectedAnswer === question.correctAnswer ? (
