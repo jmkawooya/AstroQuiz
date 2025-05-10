@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { QuizQuestion } from '../utils/quizGenerator';
-import { scrollElementToCenter } from '../utils/scrollHelper';
 
 interface QuizCardProps {
   question: QuizQuestion;
