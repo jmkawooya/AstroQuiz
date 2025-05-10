@@ -2,7 +2,7 @@ import Quiz from './components/Quiz';
 import ThemeToggle from './components/ThemeToggle';
 import { ThemeProvider } from './utils/ThemeContext';
 import { useEffect } from 'react';
-import { createWebGLStarsBackground, cleanupWebGLStarsBackground, updateStarColors } from './utils/WebGLStarsBackground';
+import { createWebGLStarsBackground, cleanupWebGLStarsBackground } from './utils/WebGLStarsBackground';
 import './App.css';
 
 function App() {
